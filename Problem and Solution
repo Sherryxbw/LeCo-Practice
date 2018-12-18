@@ -1,0 +1,104 @@
+771. Jewels and Stones:
+class Solution(object):
+    def numJewelsInStones(self, J, S):
+        """
+        :type J: str
+        :type S: str
+        :rtype: int
+        """
+        for i in range(len(S)):
+            for j in range(len(J)):
+                if s[i]==J[j]:
+                    output+=1
+        return output
+good solutions:
+	1.
+class Solution(object):
+    def numJewelsInStones(self, J, S):
+        """
+        :type J: str
+        :type S: str
+        :rtype: int
+        """
+		sum(s in J for s in S)
+	2.
+class Solution(object):
+    def numJewelsInStones(self, J, S):
+        """
+        :type J: str
+        :type S: str
+        :rtype: int
+        """
+		sum(map(S.count,J))
+
+1. Two Sum
+class Solution(object):
+    def twoSum(self, nums, target):
+        if len(nums) <= 1:
+            return False
+        buff_dict = {}
+        for i in range(len(nums)):
+            if nums[i] in buff_dict:
+                return [buff_dict[nums[i]], i]
+            else:
+                buff_dict[target - nums[i]] = i
+				
+
+3.Longest Substring without duplicates:
+	def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        lista={}
+        for i in range(len(s)):
+			j=2
+			while i+j<len(s):
+                if max(map(s[i:i+j].count,s[i:i+j]))==1:
+                    j+=1
+                else:
+                    break
+            lista[i]=j-1
+        return max(lista.values())
+121. Best time to buy and sell stock
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        curdelta=maxdelta=0
+        for i in range(1,len(prices)):
+            curdelta=max(0,prices[i]-prices[i-1]+curdelta)
+            maxdelta=max(maxdelta,curdelta)
+        return maxdelta
+
+136. Single Number:
+def singleNumber(nums):
+		return reduce(operator.xor, nums)
+def singleNumbers(nums):
+		return reduce(lambda x,y: x^y, nums)
+def singleNums(nums):
+		res=0
+		for num in nums:
+			res^=num
+		return res
+
+13. Roman to Integer
+def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        dicta={"M":1000,"D":500,"C":100,"L":50,"X":10,"V":5,"I":1}
+        sum=0
+        for char in s:
+            sum+=dicta[char]
+        
+        sum=sum-2*(s.count("IV")+s.count("IX")+10*(s.count("XL")+s.count("XC"))+100*(s.count("CM")+s.count("CD")))
+        return sum
+good solutions:
+
+169. Majority Element:
+def majorityElement(nums):
+	return sorted(nums)[len(nums)/2]
