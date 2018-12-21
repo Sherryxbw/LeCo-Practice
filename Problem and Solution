@@ -168,4 +168,55 @@ class Solution(object):
         return list(set(range(1,len(nums)+1))-set(nums))
 note: set has minus functions
 
+461. Hamming Distance
+def hammingDistance(self, x, y):
+        """
+        :type x: int
+        :type y: int
+        :rtype: int
+        """
+        return sum(map(int,bin(x^y)[2:]))
+		
+good solution:
+def hammingDistance(self, x, y):
+        """
+        :type x: int
+        :type y: int
+        :rtype: int
+        """
+        return bin(x^y).count('1')
+
+581. Shortest Unsorted Continuous Subarray
+ def findUnsortedSubarray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        is_same=[a==b for a,b in zip(nums,sorted(nums))]
+        return 0 if all(is_same) else len(nums)-is_same.index(False)-is_same[::-1].index(False)
+Good Solutions:
+find longest sorted subarray first(2, [0:p],[q:n])
+and then compare min,max of [p:n] with [0:p] and [q:n] to adjust the length of array
+class Solution(object):
+    def findUnsortedSubarray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        a=[]
+        for i in range(len(nums)-1):
+            if nums[i]>nums[i+1]:
+                a.append(i)
+        if a==[]:
+            return 0
+        
+        fa=min(a)+1
+        la=max(a)+1
+        
+        while fa>=1 and min(nums[fa:la+1])<nums[fa-1] :
+            fa-=1
+        
+        while la+1 <len(nums) and max(nums[fa:la+1])>nums[la+1] :
+            la+=1
+        return la-fa+1
 
