@@ -219,4 +219,51 @@ class Solution(object):
         while la+1 <len(nums) and max(nums[fa:la+1])>nums[la+1] :
             la+=1
         return la-fa+1
+3. Longest Substring Without Repeating Characters:
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        from collections import Counter
+        if s=='':
+            return 0
+        maxn=len(Counter(s).keys())
+        while maxn>=1:
+            for i in range(len(s)-maxn+1):
+                if max(Counter(s[i:i+maxn]).values())==1:
+                    return maxn
+            maxn-=1
+(running time too long)
+using set
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        from collections import Counter
+        a=[]
+        maxn=0
+        for i in range(len(s)):
+            while s[i] in set(a):
+                a.pop(0)
+            a.append(s[i])
+            maxn=max(len(a),maxn)
+        return maxn
 
+def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        a={}
+        start=maxn=0
+        for i in range(len(s)):
+            if s[i] in a.keys():
+                start=max(a[s[i]]+1,start)
+            a[s[i]]=i
+            maxn=max(i-start+1,maxn)
+        return maxn
+            
